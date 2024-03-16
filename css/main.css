@@ -1,0 +1,36 @@
+#stage {
+  height: 500px;
+  width: 400px;
+  background-color: red;
+  position: relative;
+}
+
+.ball {
+  background-color: blue;
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+
+  left: 180px;
+}
+
+#interceptor {
+  position: absolute;
+  height: 10px;
+  width: 100px;
+  background-color: aqua;
+
+  left: 145px;
+  right: 1px;
+
+  top: 400px;
+}
+
+#but-surface {
+  background-color: greenyellow;
+  width: 100%;
+  height: 85px;
+  position: relative;
+  top: 415px;
+}
