@@ -1,3 +1,9 @@
+#info-bar {
+  height: 50px;
+  width: 400px;
+  background-color: yellow;
+}
+
 #stage {
   height: 500px;
   width: 400px;

@@ -1,11 +1,19 @@
 // global variable
 // static variables
 let counterBallCreated = 1;
+let gameScore = 0;
+let startTime = 0;
+let scoreInterval;
 
 // elements
 const stageElement = document.getElementById("stage");
 const butSurfaceElement = document.getElementById("but-surface");
 const interceptorElement = document.getElementById("interceptor");
+const infoBarElement = document.getElementById("info-bar");
+const gameScoreElement = document.getElementById("game-score");
+const ballCreatedCounterElement = document.getElementById(
+  "ball-created-counter"
+);
 let ballElement = document.querySelector(".ball");
 
 // styles of element
@@ -27,10 +35,18 @@ const interceptorHeight = interceptorElement.offsetHeight;
 const ballWidth = ballElement.offsetWidth;
 const ballHeight = ballElement.offsetHeight;
 
+const updateInfoBar = () => {
+  gameScoreElement.textContent = gameScore;
+  ballCreatedCounterElement.textContent = counterBallCreated;
+};
 // utils functions
-const randomGeneration = (speed) => Math.random() * speed;
+const randomGeneration = (speed) => Math.random() * speed + Math.random();
+
+const speedForBallX = randomGeneration(2);
+const speedForBallY = randomGeneration(6);
 
 const createNewBall = () => {
+  updateInfoBar();
   const ballElement = document.createElement("div");
   ballElement.setAttribute("class", "ball");
 
@@ -39,8 +55,28 @@ const createNewBall = () => {
 
   stageElement.appendChild(ballElement);
   counterBallCreated++;
+  startTime = Date.now();
   console.log(counterBallCreated);
-  moveBall(randomGeneration(20), randomGeneration(10));
+  moveBall(speedForBallX, speedForBallY);
+
+  //dlete this
+  gameScore = 0;
+  scoreInterval = setInterval(() => {
+    gameScore += 10;
+    updateInfoBar();
+  }, 1000);
+};
+
+const showModal = (score) => {
+  const modal = document.createElement("div");
+  modal.className = "modal";
+  modal.innerHTML = `
+    <div class="modal-content">
+      <p>Votre score est de ${score}. Il sera déduit de 1000.</p>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  return modal;
 };
 
 // event trigger functions
@@ -119,7 +155,25 @@ const moveBall = (ballSpeedX, ballSpeedY) => {
     ballPosY <= butSurfaceTop + butSurfaceHeight
   ) {
     ballElement.remove();
-    createNewBall();
+
+    const endTime = Date.now();
+    const elapsedTime = endTime - startTime;
+
+    const scoreIncrement = (elapsedTime / 1000) * 10;
+    gameScore += scoreIncrement;
+
+    updateInfoBar();
+
+    setTimeout(() => {
+
+      const modal = showModal(gameScore);
+      setTimeout(() => {
+        modal.remove();
+      }, 1000);
+
+      gameScore -= 1000;
+      createNewBall();
+    }, 1000);
     return;
   }
 
@@ -129,4 +183,4 @@ const moveBall = (ballSpeedX, ballSpeedY) => {
 };
 
 // start point of this app
-moveBall(randomGeneration(20), randomGeneration(10));
+moveBall(speedForBallX, speedForBallY);
