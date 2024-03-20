@@ -59,7 +59,6 @@ const createNewBall = () => {
   console.log(counterBallCreated);
   moveBall(speedForBallX, speedForBallY);
 
-  //dlete this
   gameScore = 0;
   scoreInterval = setInterval(() => {
     gameScore += 10;
@@ -79,34 +78,25 @@ const showModal = (score) => {
   return modal;
 };
 
-// event trigger functions
 document.addEventListener("keydown", (e) => {
   const interceptorStyleLeft = interceptorStyle.getPropertyValue("left");
-  //   debugger;
   let interceptorStyleLeftRealTime = parseInt(interceptorStyleLeft);
   if (e.key == "ArrowLeft" && interceptorStyleLeftRealTime - 10 >= 0) {
     e.preventDefault();
-    // console.log("ksskss", interceptorStyleLeftRealTime);
     interceptorElement.style.left =
       parseInt(interceptorElement.style.left || interceptorStyleLeft) -
       10 +
       "px";
-    // console.log(interceptorElement.style.left);
   }
-  //   console.log("stage offset", stageElement.offsetWidth);
   if (
     e.key == "ArrowRight" &&
     interceptorStyleLeftRealTime + 10 <= stageWidth - interceptorWidth
   ) {
     e.preventDefault();
-    // console.log(interceptorElement.style.left);
     interceptorElement.style.left =
       parseInt(interceptorElement.style.left || interceptorStyleLeft) +
       10 +
       "px";
-    // console.log(interceptorElement.style.left);
-
-    // console.log("ArrowRight");
   }
 });
 
@@ -132,11 +122,6 @@ const moveBall = (ballSpeedX, ballSpeedY) => {
     ballSpeedY = -ballSpeedY;
   }
 
-  //   console.log(
-  //     "xi barakaa ",
-  //     butSurfaceTop + butSurfaceHeight + interceptorHeight
-  //   );
-  //   console.log("xi barakaa dtalhom", posY + ballHeight);
   console.log(interceptorElement.style.left);
   console.log("interceptorWidth", interceptorWidth);
 
@@ -165,7 +150,6 @@ const moveBall = (ballSpeedX, ballSpeedY) => {
     updateInfoBar();
 
     setTimeout(() => {
-
       const modal = showModal(gameScore);
       setTimeout(() => {
         modal.remove();
