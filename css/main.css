@@ -3,6 +3,17 @@
   width: 400px;
   background-color: yellow;
 }
+#game-score {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 36px;
+  font-weight: bold;
+  font-family: Arial, sans-serif; 
+  color: white; 
+}
+
 
 #stage {
   height: 500px;
