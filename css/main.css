@@ -1,11 +1,12 @@
-body, html {
+body,
+html {
   height: 100%;
   margin: 0;
 }
 
 #stage {
   height: 100vh;
-  width: 100vw; 
+  width: 100vw;
   background-color: red;
   position: relative;
   display: flex;
@@ -14,6 +15,35 @@ body, html {
 }
 
 #game-score {
+  position: absolute;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+#retry-button {
+  position: absolute;
+  height: 40px;
+  width: 150px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+}
+
+#retry-button:hover {
+  background-color: #45a049;
+}
+
+#number-shots {
   position: absolute;
   font-size: 36px;
   font-weight: bold;
